@@ -1,0 +1,20 @@
+# Subscripz-Buster Dependencies
+
+# Core MCP functionality
+mcp[cli]>=0.1.0
+
+# Data analysis and manipulation
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+# Standard library modules used (no installation needed):
+# - sqlite3 (database access)
+# - json (data serialization)
+# - re (regular expressions)
+# - datetime (date handling)
+# - pathlib (file paths)
+# - collections (data structures)
+# - dataclasses (data models)
+# - argparse (command line arguments)
+# - subprocess (process management)
+# - tempfile (temporary files)
