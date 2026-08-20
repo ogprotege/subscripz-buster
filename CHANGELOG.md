@@ -5,6 +5,21 @@ All notable changes to Subscripz-Buster will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-08-20
+
+### Added
+- **Recurring-charge engine** (`subscripz/`): clusters mail by merchant and
+  detects cadence from charge dates, then ranks cancel / consolidate / review.
+- Single CLI: `python -m subscripz scan` with `--mail-db`, `--source messages`,
+  `--format json`, `--output-json`, `--dry-run`, `--quiet`.
+- MCP tools `hunt_recurring_charges` and `subscription_action_plan` (in-process).
+- Menu option 18 in `scan_subscriptions_now.py`.
+- Pytest coverage for merchants, recurrence, hunt actions, CLI, and Apple Mail source.
+
+### Changed
+- The product surface is the cadence engine. Legacy keyword scanners remain
+  available but are no longer the recommended path.
+
 ## [2.1.0] - 2024-12-20
 
 ### Added

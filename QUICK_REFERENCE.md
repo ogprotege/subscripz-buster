@@ -4,13 +4,22 @@
 
 ```bash
 cd ~/Desktop/subscripz-buster
-python3 scan_subscriptions_now.py
-# Choose option 7 (Working Scanner)
+python3 -m subscripz scan --days 365
 ```
+
+That is the v2.4 cadence engine: recurring series + ranked actions.
+Legacy menu: `python3 scan_subscriptions_now.py` (option 18).
 
 ## 📋 Most Useful Commands
 
-### Find All Subscriptions
+### Hunt recurring charges (recommended)
+```bash
+python3 -m subscripz scan --days 365
+python3 -m subscripz scan --days 365 --output-json hunt.json --quiet
+python3 -m subscripz scan --dry-run --days 365
+```
+
+### Find All Subscriptions (legacy keyword scanner)
 ```bash
 python3 working_scanner.py --days 365
 ```

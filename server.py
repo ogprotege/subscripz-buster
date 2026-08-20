@@ -14,6 +14,14 @@ from mcp.server.fastmcp import FastMCP
 import subprocess
 import sys
 
+try:
+    from subscripz.engine import hunt
+    from subscripz.report import render_text
+    from subscripz.sources.apple_mail import AppleMailSource
+    RECURRENCE_ENGINE_AVAILABLE = True
+except ImportError:
+    RECURRENCE_ENGINE_AVAILABLE = False
+
 # Set up logging
 # Use a log file in the project directory instead of trying to write to root
 log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'subscripz_buster_mcp.log')
@@ -36,7 +44,7 @@ except ImportError:
 
 mcp = FastMCP(
     "subscripz-buster",
-    description="Universal subscription hunter that scans Apple Mail for all your subscriptions"
+    description="Local recurring-charge hunter: cadence detection plus Apple Mail keyword scanners"
 )
 
 # Store the latest scan results for use across tools
@@ -116,6 +124,62 @@ def run_scanner(scanner_name: str, days_back: int = 365, output_json: bool = Tru
     except Exception as e:
         logger.error(f"Error running scanner: {str(e)}", exc_info=True)
         return f"Error running scanner: {str(e)}"
+
+@mcp.tool()
+def hunt_recurring_charges(days_back: int = 365) -> str:
+    """
+    Hunt recurring charges using cadence detection (same merchant, similar
+    amount, regular interval). Returns a ledger plus a ranked action plan.
+    Prefer this over the older keyword-only scanners.
+    """
+    logger.info(f"MCP Tool called: hunt_recurring_charges(days_back={days_back})")
+    if not RECURRENCE_ENGINE_AVAILABLE:
+        return "Recurrence engine is not installed. Run from the repo root so `subscripz` imports."
+    try:
+        source = AppleMailSource()
+        result = hunt(source.load(days_back), days_back=days_back, source="apple-mail")
+        return render_text(result)
+    except FileNotFoundError as exc:
+        return str(exc)
+    except Exception as exc:
+        logger.error("hunt_recurring_charges failed", exc_info=True)
+        return f"Error hunting recurring charges: {exc}"
+
+
+@mcp.tool()
+def subscription_action_plan(days_back: int = 365) -> str:
+    """
+    Ranked cancel / consolidate / review list with monthly impact.
+    Uses the recurrence engine, not keyword-only matching.
+    """
+    logger.info(f"MCP Tool called: subscription_action_plan(days_back={days_back})")
+    if not RECURRENCE_ENGINE_AVAILABLE:
+        return "Recurrence engine is not installed. Run from the repo root so `subscripz` imports."
+    try:
+        source = AppleMailSource()
+        result = hunt(source.load(days_back), days_back=days_back, source="apple-mail")
+        money = result.financials()
+        lines = [
+            "ACTION PLAN",
+            f"Recoverable: ${money['recoverable_monthly']:.2f}/mo "
+            f"(${money['recoverable_annual']:.2f}/yr)",
+            "",
+        ]
+        actionable = [a for a in result.actions if a.kind != "keep"]
+        if not actionable:
+            return "No cancel/consolidate/review actions. Ledger looks consistent."
+        for i, action in enumerate(actionable, 1):
+            lines.append(
+                f"{i}. {action.kind}  {action.merchant_name}  "
+                f"${action.monthly_impact:.2f}/mo  {action.reason}"
+            )
+        return "\n".join(lines)
+    except FileNotFoundError as exc:
+        return str(exc)
+    except Exception as exc:
+        logger.error("subscription_action_plan failed", exc_info=True)
+        return f"Error building action plan: {exc}"
+
 
 @mcp.tool()
 def scan_all_subscriptions(days_back: int = 365) -> str:
