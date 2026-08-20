@@ -15,7 +15,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MCP tools `hunt_recurring_charges` and `subscription_action_plan` (in-process).
 - Menu option 18 in `scan_subscriptions_now.py`.
 - Pytest coverage for merchants, recurrence, hunt actions, CLI, and Apple Mail source.
-- README rewritten around the cadence engine (install, hunt, sample output, MCP).
 
 ### Changed
 - The product surface is the cadence engine. Legacy keyword scanners remain
