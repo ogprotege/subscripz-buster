@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="488" viewBox="0 0 840 488" fill="none">
+  <defs>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1B1B20"/>
+      <stop offset="100%" stop-color="#101014"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="8" y="8" width="824" height="472" rx="18" fill="url(#glass)" stroke="#2C2C34"/>
+
+  <circle cx="36" cy="36" r="6" fill="#FF5F57"/>
+  <circle cx="56" cy="36" r="6" fill="#FEBC2E"/>
+  <circle cx="76" cy="36" r="6" fill="#28C840"/>
+  <text x="420" y="40" text-anchor="middle" fill="#7A7A84" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">python -m subscripz scan --days 365</text>
+
+  <text font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13.5">
+    <tspan x="36" y="80" fill="#7A7A84">$</tspan>
+    <tspan fill="#E8E6E3"> python -m subscripz scan --days 365</tspan>
+
+    <tspan x="36" y="116" fill="#E6B450">SUBSCRIPZ HUNT</tspan>
+    <tspan x="36" y="136" fill="#3A3A44">--------------------------------------------------------</tspan>
+    <tspan x="36" y="160" fill="#E8E6E3">6 recurring series   </tspan>
+    <tspan fill="#7DCE9A">$116.95/mo</tspan>
+    <tspan fill="#7A7A84">   $1,403.40/yr</tspan>
+    <tspan x="36" y="180" fill="#E8E6E3">4 actions            </tspan>
+    <tspan fill="#E6B450">$83.98/mo recoverable</tspan>
+
+    <tspan x="36" y="214" fill="#7A7A84">ACTION PLAN</tspan>
+    <tspan x="36" y="238" fill="#F07178">CANCEL      </tspan>
+    <tspan fill="#E8E6E3">Planet Fitness     </tspan>
+    <tspan fill="#F07178">$24.99/mo  </tspan>
+    <tspan fill="#7A7A84">last charge 153 days ago</tspan>
+    <tspan x="36" y="258" fill="#82AAFF">CONSOLIDATE </tspan>
+    <tspan fill="#E8E6E3">Adobe              </tspan>
+    <tspan fill="#82AAFF">$54.99/mo  </tspan>
+    <tspan fill="#7A7A84">same merchant, 2 accounts</tspan>
+    <tspan x="36" y="278" fill="#E6B450">REVIEW      </tspan>
+    <tspan fill="#E8E6E3">Hulu               </tspan>
+    <tspan fill="#E6B450"> $4.00/mo  </tspan>
+    <tspan fill="#7A7A84">price 5.99 -&gt; 9.99</tspan>
+    <tspan x="36" y="298" fill="#E6B450">REVIEW      </tspan>
+    <tspan fill="#E8E6E3">Cursor             </tspan>
+    <tspan fill="#7A7A84">     n/a  trial, no paid cadence yet</tspan>
+
+    <tspan x="36" y="332" fill="#7A7A84">LEDGER</tspan>
+    <tspan x="36" y="356" fill="#7A7A84">  merchant            monthly     freq       last</tspan>
+    <tspan x="36" y="376" fill="#E8E6E3">  Adobe               </tspan>
+    <tspan fill="#7DCE9A">$54.99     </tspan>
+    <tspan fill="#E8E6E3">monthly    17d</tspan>
+    <tspan x="36" y="396" fill="#E8E6E3">  Planet Fitness      </tspan>
+    <tspan fill="#7DCE9A">$24.99     </tspan>
+    <tspan fill="#E8E6E3">monthly   153d</tspan>
+    <tspan x="36" y="416" fill="#E8E6E3">  Netflix             </tspan>
+    <tspan fill="#7DCE9A">$15.99     </tspan>
+    <tspan fill="#E8E6E3">monthly    19d</tspan>
+    <tspan x="36" y="436" fill="#E8E6E3">  Spotify             </tspan>
+    <tspan fill="#7DCE9A">$10.99     </tspan>
+    <tspan fill="#E8E6E3">monthly    15d</tspan>
+  </text>
+</svg>
