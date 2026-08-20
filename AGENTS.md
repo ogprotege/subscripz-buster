@@ -16,14 +16,18 @@ stdio). See `README.md` / `QUICK_REFERENCE.md` for the full command list.
 - `uv` is installed at `~/.local/bin/uv`.
 
 ### Running / testing
+- **Preferred CLI (v2.4 recurrence engine)**:
+  `.venv/bin/python -m subscripz scan --days 365`
+  (`--dry-run`, `--output-json <path>`, `--quiet`, `--format json`,
+  `--mail-db PATH`, `--source messages --messages file.json`).
 - MCP server: `.venv/bin/python server.py` (stdio). To smoke-test without a client,
   pipe an `initialize` + `notifications/initialized` + `tools/list` JSON-RPC sequence
-  into it. It exposes ~10 tools (`scan_all_subscriptions`, `comprehensive_scan`,
-  `find_duplicate_subscriptions`, `financial_summary`, `export_to_excel`, …) and shells
-  out to the scanner scripts as subprocesses.
-- CLI scanners: e.g. `.venv/bin/python working_scanner.py --days 365`
+  into it. It exposes the original ~10 tools plus `hunt_recurring_charges` and
+  `subscription_action_plan` (in-process engine). Legacy tools still shell out to
+  scanner scripts as subprocesses.
+- Legacy CLI scanners: e.g. `.venv/bin/python working_scanner.py --days 365`
   (`--dry-run`, `--output-json <path>`, `--quiet`). Interactive launcher:
-  `scan_subscriptions_now.py`.
+  `scan_subscriptions_now.py` (option 18 is the cadence engine).
 
 ### Non-obvious notes — testing on Linux (no Apple Mail)
 - Scanners read the macOS Apple Mail SQLite DB at
@@ -39,4 +43,7 @@ stdio). See `README.md` / `QUICK_REFERENCE.md` for the full command list.
   - optional `recipients(message INTEGER, address INTEGER, type INTEGER)` (`type=0` = "To")
   Put dollar amounts in the subject text so `PaymentExtractor` can pick them up. This
   DB lives outside the repo, so rebuild it if the VM state is fresh.
+- The v2.4 engine can also take `--mail-db PATH` or `--source messages --messages`
+  fixtures, so you do not have to write into `~/Library/Mail` to test it.
+  `subscripz.sources.apple_mail.write_envelope_index` builds the synthetic DB.
 - Output JSON/CSV/XLSX and `*.log` are gitignored.

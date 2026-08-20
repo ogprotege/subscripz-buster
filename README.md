@@ -1,4 +1,21 @@
-# Subscripz-Buster v2.3.0
+# Subscripz-Buster v2.4.0
+
+A local recurring-charge hunter for Apple Mail. It turns receipt mail into a
+**ledger + action plan**: what is charging you on a cadence, how much, and what
+to cancel, consolidate, or review.
+
+The older keyword scanners are still in the repo. They are not the product.
+
+### Start here
+
+```bash
+python -m subscripz scan --days 365
+python -m subscripz scan --output-json hunt.json --quiet
+python -m subscripz scan --source messages --messages charges.json --format json
+```
+
+A subscription is the same merchant taking a similar amount on a regular
+interval — not a subject line that contains the word `payment`.
 
 A comprehensive subscription detection and analysis system for Apple Mail that uncovers ALL your recurring charges, finds duplicate subscriptions, and helps you save money by identifying services you're paying for across multiple accounts or no longer using.
 

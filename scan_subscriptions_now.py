@@ -33,6 +33,7 @@ def main():
         print("🔍 SUBSCRIPTION SCANNER LAUNCHER")
         print("=" * 50)
         print("\nChoose an option:")
+        print("18. ⭐ Recurring-charge hunt (cadence engine)  NEW")
         print("1. Simple scan (basic)")
         print("2. Advanced scan with console output")
         print("3. Full scan with Excel export")
@@ -52,7 +53,7 @@ def main():
         print("17. 🔒📊 SECURE Excel Scanner - Fraud Filter + Excel Export (NEW!)")
         print("0. Exit")
         
-        choice = input("\nEnter choice (0-17): ").strip()
+        choice = input("\nEnter choice (0-18): ").strip()
         
         if choice == '0':
             print("\n👋 Goodbye!")
@@ -215,6 +216,18 @@ def main():
             if filename:
                 args.extend(["--output", filename])
             run_scanner("secure_excel_scanner.py", args)
+
+        elif choice == '18':
+            print("\n⭐ Recurring-charge hunt (cadence, not keyword lists)...")
+            years = input("How many years to scan? (default 1): ").strip() or "1"
+            days = int(float(years) * 365)
+            cmd = [sys.executable, "-m", "subscripz", "scan", "--days", str(days)]
+            try:
+                subprocess.run(cmd, cwd=Path(__file__).parent)
+            except KeyboardInterrupt:
+                print("\n\n⚠️  Scan cancelled by user")
+            except Exception as e:
+                print(f"\n❌ Error running hunt: {e}")
         
         else:
             print("\n⚠️  Invalid choice!")
